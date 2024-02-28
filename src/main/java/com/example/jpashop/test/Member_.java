@@ -1,4 +1,4 @@
-package com.example.jpashop;
+package com.example.jpashop.test;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -8,7 +8,7 @@ import lombok.Setter;
 
 @Entity
 @Getter @Setter
-public class Member {
+public class Member_ {
 
     @Id @GeneratedValue
     private Long id;
