@@ -6,11 +6,11 @@ import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity
-@Getter @Setter
-public class Member_ {
-
-    @Id @GeneratedValue
-    private Long id;
-    private String username;
-}
+//@Entity
+//@Getter @Setter
+//public class Member_ {
+//
+//    @Id @GeneratedValue
+//    private Long id;
+//    private String username;
+//}
