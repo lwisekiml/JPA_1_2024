@@ -21,5 +21,5 @@ public class Delivery {
     private Address address;
 
     @Enumerated(EnumType.STRING) // ORDINAL 로 하면 중간에 값이 삽입 될 순서가 바뀌어 장애가 생길 수 있다.
-    private DeliveryStatus deliveryStatus; // READY, COMP
+    private DeliveryStatus status; // READY, COMP
 }
