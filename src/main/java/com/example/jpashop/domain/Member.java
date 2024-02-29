@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -21,5 +22,5 @@ public class Member {
     private Address address;
 
     @OneToMany(mappedBy = "member") // Order에 있는 member에 매핑 되어진 진다. 그래서 여기값이 바뀌어도 외래키값이 변경되지 않는다.
-    private List<Order> orders;
+    private List<Order> orders = new ArrayList<>();
 }
