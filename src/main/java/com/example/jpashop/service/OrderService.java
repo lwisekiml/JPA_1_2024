@@ -45,6 +45,8 @@ public class OrderService {
         // 주문 저장
         orderRepository.save(order); // Order에 보면 Delivery와 OrderItem에 cascade 적용되어 있어 따로 save 하지 않아도 된다.
 
+//        OrderItem orderItem1 = new OrderItem(); // 빨간줄로 생성하면 안된다는 것을 알려준다.
+
         return order.getId();
     }
 
