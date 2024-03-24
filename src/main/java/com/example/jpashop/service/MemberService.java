@@ -42,4 +42,10 @@ public class MemberService {
     public Member findOne(Long memberId) {
         return memberRepository.findOne(memberId);
     }
+
+    @Transactional
+    public void update(Long id, String name) { // member를 넘겨도 되지만 컨맨드와 쿼리를 분리하기 위해 void로 함
+        Member member = memberRepository.findOne(id);
+        member.setName(name);
+    }
 }
