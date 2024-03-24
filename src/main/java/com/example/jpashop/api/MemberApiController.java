@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -19,6 +20,33 @@ public class MemberApiController {
     @GetMapping("/api/v1/members")
     public List<Member> membersV1() {
         return memberService.findMembers();
+    }
+
+    @GetMapping("/api/v2/members")
+    public Result memberV2() {
+        List<Member> findMembers = memberService.findMembers();
+
+        List<MemberDto> collect = findMembers.stream()
+                .map(m -> new MemberDto(m.getName()))
+                .collect(Collectors.toList());
+
+        // List를 바로 내면 json배열 타입으로 나가게 되어 유연성이 떨어져서 한번 감싸서 return한다.
+        // 아래와 같이 count를 추가하거나 다른 것들을 추가할 수 있기때문에 한번 감싼다.
+//        return new Result(collect.size(), collect);
+        return new Result(collect);
+   }
+
+    @Data
+    @AllArgsConstructor
+    private class Result<T> {
+//        private int count;
+        private T data;
+    }
+
+    @Data
+    @AllArgsConstructor
+    static class MemberDto {
+        private String name;
     }
 
     @PostMapping("/api/v1/members")
@@ -73,4 +101,6 @@ public class MemberApiController {
         private Long id;
         private String name;
     }
+
+
 }
