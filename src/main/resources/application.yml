@@ -6,7 +6,7 @@ spring:
     driver-class-name: org.h2.Driver
   jpa:
     hibernate:
-      ddl-auto: none # application 실해 시점에 가지고 있는 테이블 다 지우고 다시 생성
+      ddl-auto: create # application 실해 시점에 가지고 있는 테이블 다 지우고 다시 생성
     properties:
       hibernate:
 #        show_sql: true
