@@ -12,8 +12,17 @@ public class JpashopApplication {
 		SpringApplication.run(JpashopApplication.class, args);
 	}
 
+//	@Bean
+//	Hibernate5JakartaModule hibernate5Module() {
+//		return new Hibernate5JakartaModule();
+//	}
+
+	// 사용 하지 말자
 	@Bean
 	Hibernate5JakartaModule hibernate5Module() {
-		return new Hibernate5JakartaModule();
+		Hibernate5JakartaModule hibernate5Module = new Hibernate5JakartaModule();
+		//강제 지연 로딩 설정
+		hibernate5Module.configure(Hibernate5JakartaModule.Feature.FORCE_LAZY_LOADING, true);
+		return hibernate5Module;
 	}
 }
