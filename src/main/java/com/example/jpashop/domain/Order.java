@@ -22,7 +22,7 @@ public class Order {
     @Column(name = "order_id")
     private Long id;
 
-    @ManyToOne(fetch = LAZY)
+    @ManyToOne(fetch = LAZY) // 지연 로딩이여서 DB에서 안 끌고 온다. 그래서 order를 호출할 때 멤버를 상속받아 proxy 멤법 객체를 생성해서 넣어둔다.
     @JoinColumn(name = "member_id") // 외래키 이름이 member_id 가 된다.
     private Member member; // Order가 Member와의 연관관계 주인이다. 값을 세팅하면 member_id 외래키 값이 다른 멤버로 변경된다.
 

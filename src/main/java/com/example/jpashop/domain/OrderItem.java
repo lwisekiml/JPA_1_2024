@@ -1,6 +1,7 @@
 package com.example.jpashop.domain;
 
 import com.example.jpashop.domain.item.Item;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -21,6 +22,7 @@ public class OrderItem {
     @JoinColumn(name = "item_id")
     private Item item;
 
+    @JsonIgnore
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "order_id") // 외래키 이름이 order_id가 된다.
     private Order order;

@@ -29,6 +29,9 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-devtools'
 	implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.9.0' // 시스템 자원을 사용하여 운영시스템에 적용시 꼭 성능 테스트 하고 사용
 
+	// 하이버네이트 모듈
+	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-hibernate5-jakarta'
+
 	compileOnly 'org.projectlombok:lombok'
 
 	runtimeOnly 'com.h2database:h2'
