@@ -24,6 +24,12 @@ public class OrderSimpleApiController {
     @GetMapping("/api/v1/simple-orders")
     public List<Order> ordersV1() {
         List<Order> all = orderRepository.findAllByString(new OrderSearch());
+        for (Order order : all) {
+            // order.getMember() 까지는 proxy 객체
+            // getName()까지 하면 Lazy 강제 초기화가 된다.(쿼리를 날려서 jpa가 데이터를 가져온다.)
+            order.getMember().getName();
+            order.getDelivery().getAddress();
+        }
         return all;
     }
 
