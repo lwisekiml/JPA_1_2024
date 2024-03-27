@@ -59,6 +59,16 @@ public class OrderSimpleApiController {
 //                .collect(toList());
     }
 
+    @GetMapping("/api/v3/simple-orders")
+    public List<SimpleOrderDto> ordersV3() {
+        // 멤버 객체와 딜리버리 객체가 오더에 같이 조회가 되서 나온다. lazy 로딩을 고민하지 않아도 된다.
+        List<Order> orders = orderRepository.findAllWithMemberDelivery();
+        List<SimpleOrderDto> result = orders.stream()
+                .map(o -> new SimpleOrderDto(o))
+                .collect(Collectors.toList());
+        return result;
+    }
+
     @Data
     private class SimpleOrderDto {
         private Long orderId;
