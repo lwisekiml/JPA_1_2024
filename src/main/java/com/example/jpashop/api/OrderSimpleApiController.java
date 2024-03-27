@@ -1,13 +1,20 @@
 package com.example.jpashop.api;
 
+import com.example.jpashop.domain.Address;
 import com.example.jpashop.domain.Order;
+import com.example.jpashop.domain.OrderStatus;
 import com.example.jpashop.repository.OrderRepository;
 import com.example.jpashop.repository.OrderSearch;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.*;
 
 /**
  * xToOne(ManyToOne, OneToOne)
@@ -33,4 +40,39 @@ public class OrderSimpleApiController {
         return all;
     }
 
+    // V1, V2의 문제점
+    // order, delivery, address 테이블을 건들게 된다.
+    @GetMapping("/api/v2/simple-orders")
+    public List<SimpleOrderDto> ordersV2() {
+        // ORDER 2개
+        // N + 1 -> 1 + 회원 N + 배송 N
+        List<Order> orders = orderRepository.findAllByString(new OrderSearch());
+
+        List<SimpleOrderDto> result = orders.stream()
+                .map(o -> new SimpleOrderDto(o))
+                .collect(Collectors.toList());
+
+        return result;
+
+//        return orderRepository.findAllByString(new OrderSearch()).stream()
+//                .map(SimpleOrderDto::new)
+//                .collect(toList());
+    }
+
+    @Data
+    private class SimpleOrderDto {
+        private Long orderId;
+        private String name;
+        private LocalDateTime orderDate;
+        private OrderStatus orderStatus;
+        private Address address;
+
+        public SimpleOrderDto(Order order) {
+            orderId = order.getId();
+            name = order.getMember().getName(); // Lazy 초기화
+            orderDate = order.getOrderDate();
+            orderStatus = order.getStatus();
+            address = order.getDelivery().getAddress(); // Lazy 초기화
+        }
+    }
 }
