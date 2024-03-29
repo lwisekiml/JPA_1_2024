@@ -5,6 +5,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.BatchSize;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -30,6 +31,7 @@ public class Order {
     // 모든 엔티티는 기본적으로 persist를 다 저장하고 싶으면 각자 해주어야 하는데
     // delivery 에 값만 세팅을 해두고 Order만 persist하면 delivery도 같이 persist가 호출 된다.
     // cascade는 예를 들어서 부모 엔티티를 저장할 때 자식엔티티도 한번에 함께 저장하는 기능
+//    @BatchSize(size = 1000) // 디테일하게 적용할 때
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
 

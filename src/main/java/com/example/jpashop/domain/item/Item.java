@@ -5,10 +5,12 @@ import com.example.jpashop.exception.NotEnoughStockException;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.BatchSize;
 
 import java.util.ArrayList;
 import java.util.List;
 
+//@BatchSize(size = 100) // 컬렉션이 아닌데 적용하고 싶은 경우 여기에 적는다.
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE) // 싱글 테이블 전략
 @DiscriminatorColumn(name = "dtype") // 상속 관계 맵핑을 위함
